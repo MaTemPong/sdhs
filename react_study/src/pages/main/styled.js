@@ -32,7 +32,10 @@ export const MainWapper = styled.div`
     &:hover {
       cursor: pointer;
       background-color: gray;
-      color: white;
+    }
+    > a {
+      color: #000000;
+      text-decoration: none;
     }
   }
 `;

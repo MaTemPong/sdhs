@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 
 import Router from './pages/Router';
+import Todos from './pages/todos';
 
 import './reset.css';
 
