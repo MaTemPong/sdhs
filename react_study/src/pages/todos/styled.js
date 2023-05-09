@@ -11,13 +11,3 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2``;
-
-export const InputBox = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  padding: 4px;
-`;

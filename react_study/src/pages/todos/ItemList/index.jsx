@@ -1,9 +1,15 @@
 import * as S from './styled';
 
-function ItemList(){
+import Todo from '../../../components/Todo';
+
+function ItemList({todos}){
+
+
     return(
       <S.ItemList>
-
+        {todos.map(({id, name}) => {
+            return <Todo key={id}>{name}</Todo>;
+        })}
       </S.ItemList>  
     );
 }
