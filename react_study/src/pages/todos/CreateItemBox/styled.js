@@ -11,6 +11,7 @@ export const InputBox = styled.div`
     color: white;
     cursor: pointer;
     font-weight: bold;
+    border: none;
   }
 `;
 
