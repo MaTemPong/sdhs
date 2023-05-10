@@ -12,6 +12,7 @@ export const InputBox = styled.div`
     cursor: pointer;
     font-weight: bold;
     border: none;
+    border-radius: 0 10px 10px 0;
   }
 `;
 
@@ -19,5 +20,6 @@ export const Input = styled.input`
   width: 100%;
   padding: 4px;
   border: none;
+  border-radius: 0 0 0 10px;
   border-bottom: solid black 2px;
 `;

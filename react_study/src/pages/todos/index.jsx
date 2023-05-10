@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as S from './styled';
 import CreateItemBox from './CreateItemBox';
@@ -9,15 +10,25 @@ function Todos(){
     const [todos, setTodos] = useState([]);
 
     const createTodo = () =>{
-        setTodos(prevState => [...prevState, {id: prevState.length, name: todoName}]);
+        if(!todoName.trim()) return alert("공백 게시물은 게시가 불가합니다.");
+        setTodoName('');
+        setTodos(prevState => [...prevState, {id: uuidv4(), name: todoName}]);
+    }
+
+    const deleteTodo = (id) => {
+        const findIndex = todos.findIndex(v => v.id === id);
+        setTodos(prevState => {
+            const tempArr = [...prevState];
+            tempArr.splice(findIndex, 1);
+            return tempArr;
+        })
     }
 
     return (
         <S.Container>
             <S.Title>To do list</S.Title>
-            {todoName}
-            <CreateItemBox onChange={setTodoName} createTodoItem={createTodo}/>
-            <ItemList todos={todos}/>
+            <CreateItemBox value={todoName} onChange={setTodoName} createTodoItem={createTodo}/>
+            <ItemList todos={todos} deleteTodo = {deleteTodo}/>
         </S.Container>
     );
 }

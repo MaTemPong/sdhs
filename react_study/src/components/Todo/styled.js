@@ -9,6 +9,11 @@ export const Container = styled.li`
   padding: 5px;
   background-color: #99ff99;
   border-radius: 5px;
+  p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   div {
     display: flex;
     gap: 5px;
