@@ -8,7 +8,7 @@ function CreateItemBox({ value, onChange, createTodoItem}){
         onChange(e.target.value);
     }
     const handleEnterValue = (e) => {
-        if(e.key === 'Enter')return createTodoItem();
+        if(e.key === 'Enter') createTodoItem();
     }
     
 
