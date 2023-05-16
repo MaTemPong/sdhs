@@ -1,33 +1,47 @@
 import { useEffect,useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 
 import * as S from './styled';
+
+import { setTodos, createTodo, deleteTodo, deleteSelectedTodos} from '../../reduce/todos'
+
 import CreateItemBox from './CreateItemBox';
 import ItemList from './ItemList';
+import SearchBar from '../../components/SearchBar';
+import Button from '../../components/Button';
 
 function Todos(){
     const [todoName, setTodoName] = useState('');
-    const [todos, setTodos] = useState([]);
+    const [searchTodo, setSearchTodo] = useState('');
+    
+    const dispatch = useDispatch();
+    const { todos } = useSelector(state => state.todos);
+    //선택한 todos들을 저장하는 state
+    const [selectedTodoIds, setSelectedTodoIds] = useState([]);
 
-    const createTodo = () =>{
+    const handleCreateTodo = () =>{
         if(!todoName.trim()) return alert("공백 게시물은 게시가 불가합니다.");
         setTodoName('');
-        setTodos(prevState => [...prevState, {id: uuidv4(), name: todoName}]);
+        dispatch(createTodo({id: uuidv4(), name: todoName}))
     }
 
-    const deleteTodo = (id) => {
-        const findIndex = todos.findIndex(v => v.id === id);
-        setTodos(prevState => {
-            const tempArr = [...prevState];
-            tempArr.splice(findIndex, 1);
-            return tempArr;
-        })
+    const handleTodoDelete = (id) => {
+        console.log(id);
+        dispatch(deleteTodo(id));
+    }
+
+    const handleSelectedTodoDelete = () => {
+        dispatch(deleteSelectedTodos(selectedTodoIds));
+        
     }
 
     useEffect(() => {
         try{
             const parseTodos = JSON.parse(localStorage.getItem('todos'));
-            setTodos(parseTodos);
+            dispatch(setTodos(parseTodos));
         } catch (error) {
             console.log(error);
         }
@@ -45,8 +59,12 @@ function Todos(){
     return (
         <S.Container>
             <S.Title>To do list</S.Title>
-            <CreateItemBox value={todoName} onChange={setTodoName} createTodoItem={createTodo}/>
-            <ItemList todos={todos} deleteTodo = {deleteTodo}/>
+            <SearchBar onChange={value => {
+                setSearchTodo(value);
+            }}/>
+            <CreateItemBox value={todoName} onChange={setTodoName} createTodoItem={handleCreateTodo}/>
+            <Button onClick={handleSelectedTodoDelete}>선택한 TO do 삭제</Button>
+            <ItemList todos={todos} searchValue={searchTodo} deleteTodo={handleTodoDelete} setSelectedTodoIds={setSelectedTodoIds}/>
         </S.Container>
     );
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../../components/Button/styled';
 
 export const Container = styled.div`
   display: flex;
@@ -8,6 +9,12 @@ export const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
   padding: 16px;
+  ${Button} {
+    &:nth-child(4) {
+      background-color: red;
+      color: white;
+    }
+  }
 `;
 
 export const Title = styled.h2``;
