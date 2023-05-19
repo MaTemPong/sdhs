@@ -4,7 +4,6 @@ import Todo from '../../../components/Todo';
 
 function ItemList({todos, deleteTodo, searchValue, setSelectedTodoIds}){
 
-
     return(
       <S.ItemList>
         {todos
