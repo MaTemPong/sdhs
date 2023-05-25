@@ -1,6 +1,10 @@
 import {InputHTMLAttributes} from 'react';
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>){
+interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
+    color?: string; // | undefined;
+}
+
+function Input(props: InputProps){
     return <input {...props }/>;
 }
 
